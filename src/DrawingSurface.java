@@ -1,5 +1,3 @@
-package dgwerlod.mazes;
-
 import processing.core.PApplet;
 
 public class DrawingSurface extends PApplet {

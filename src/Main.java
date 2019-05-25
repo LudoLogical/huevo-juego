@@ -7,7 +7,7 @@ import java.awt.*;
 public class Main {
 
     public static void main(String[] args) {
-        dgwerlod.mazes.DrawingSurface drawing = new dgwerlod.mazes.DrawingSurface();
+        DrawingSurface drawing = new DrawingSurface();
         PApplet.runSketch(new String[]{""}, drawing);
         PSurfaceAWT surf = (PSurfaceAWT) drawing.getSurface();
         PSurfaceAWT.SmoothCanvas canvas = (PSurfaceAWT.SmoothCanvas) surf.getNative();
