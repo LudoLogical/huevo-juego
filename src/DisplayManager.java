@@ -1,8 +1,12 @@
 import processing.core.PApplet;
 
-public class DrawingSurface extends PApplet {
+public class DisplayManager extends PApplet {
 
-    public DrawingSurface() {
+    private EggDisplay e;
+    private BuildingDisplay b;
+    private UpgradeDisplay u;
+
+    public DisplayManager() {
 
     }
 
