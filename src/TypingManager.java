@@ -44,7 +44,6 @@ public class TypingManager {
 
     public TypingManager() {
         pickNewPhrase();
-        currentIndex = 0;
         backspacesRequired = 0;
     }
 
@@ -53,6 +52,7 @@ public class TypingManager {
         currentPhrase += " " + nouns.get((int)(Math.random()*nouns.size()));
         //currentPhrase += " " + verbs.get((int)(Math.random()*verbs.size()));
         //currentPhrase += " " + adverbs.get((int)(Math.random()*adverbs.size()));
+        currentIndex = 0;
     }
 
     public boolean acceptInput(PApplet source) {
@@ -69,7 +69,6 @@ public class TypingManager {
             currentIndex++;
             if (currentIndex == currentPhrase.length()) {
                 pickNewPhrase();
-                currentIndex = 0;
             }
             return true;
         } else if (source.key != source.BACKSPACE) {
@@ -79,6 +78,10 @@ public class TypingManager {
     }
 
     public void draw(PApplet source) {
+        while (source.textWidth(currentPhrase) > source.width) {
+            pickNewPhrase();
+        }
+
         source.noStroke();
         source.fill(200,200,200);
         source.textSize(40);
@@ -91,6 +94,7 @@ public class TypingManager {
 
         String typed = currentPhrase.substring(0, currentIndex);
         String backspace = currentPhrase.substring(currentIndex, currentIndex + backspacesRequired);
+        backspace = backspace.replace(' ', '_');
         String remaining = currentPhrase.substring(currentIndex + backspacesRequired);
 
         source.fill(0,0,0);
