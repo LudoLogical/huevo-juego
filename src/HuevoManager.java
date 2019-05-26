@@ -43,7 +43,7 @@ public class HuevoManager {
     }
 
     public void addBuildings(int buildingID, int numBuildings) {
-        // buildings.get(buildingID).add(numBuildings);
+        buildings.get(buildingID).add(numBuildings);
         update();
     }
 

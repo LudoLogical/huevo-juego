@@ -1,5 +1,4 @@
 import processing.core.PApplet;
-import processing.core.PImage;
 
 public class DisplayManager extends PApplet {
 
@@ -43,6 +42,20 @@ public class DisplayManager extends PApplet {
             throw new IllegalArgumentException("Invalid activeDisplay value: " + activeDisplay);
         }
         handleTypingBar();
+        stroke(0);
+        fill(255);
+        if (activeDisplay == 0 || activeDisplay == 2) {
+            rect(0, height/2 - 25, 50, 50);
+            line(10, height/2, 40, height/2);
+            line(10, height/2, 15, height/2 - 5);
+            line(10, height/2, 15, height/2 + 5);
+        }
+        if (activeDisplay == 0 || activeDisplay == 1) {
+            rect(width - 50, height/2 - 25, 50, 50);
+            line(width - 10, height/2, width - 40, height/2);
+            line(width - 10, height/2, width - 15, height/2 - 5);
+            line(width - 10, height/2, width - 15, height/2 + 5);
+        }
     }
 
     private void handleTypingBar() {
@@ -54,7 +67,25 @@ public class DisplayManager extends PApplet {
         boolean addHuevos = typingManager.acceptInput(this);
         if (addHuevos) {
             huevoManager.addTypedHuevos();
-            eDisplay.addfallingegg();
+            eDisplay.addfallingegg(width);
+        }
+    }
+
+    public void mousePressed() {
+        boolean leftRegion = mouseX > 0 && mouseX < 50 && mouseY > width/2 - 25 && mouseY < width/2 + 25;
+        boolean rightRegion = mouseX > width-50 && mouseX < width && mouseY > width/2 - 25 && mouseY < width/2 + 25;
+        if (leftRegion) {
+            if (activeDisplay == 0) {
+                activeDisplay = 1;
+            } else if (activeDisplay == 2) {
+                activeDisplay = 0;
+            }
+        } else if (rightRegion) {
+            if (activeDisplay == 0) {
+                activeDisplay = 2;
+            } else if (activeDisplay == 1) {
+                activeDisplay = 0;
+            }
         }
     }
 
