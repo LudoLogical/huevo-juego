@@ -31,7 +31,6 @@ public class DisplayManager extends PApplet {
     // line is executed again.
     public void draw() {
         background(255);   // Clear the screen with a white background
-        handleTypingBar();
         if (activeDisplay == 0) {
             eDisplay.draw(this);
         } else if (activeDisplay == 1) {
@@ -41,6 +40,7 @@ public class DisplayManager extends PApplet {
         } else {
             throw new IllegalArgumentException("Invalid activeDisplay value: " + activeDisplay);
         }
+        handleTypingBar();
     }
 
     private void handleTypingBar() {

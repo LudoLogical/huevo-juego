@@ -5,20 +5,26 @@ import java.awt.geom.Point2D;
 import java.util.ArrayList;
 
 public class EggDisplay {
-    private int eggX;
-    private int eggY;
+    ArrayList<Point2D.Float> eggCoordinates;
     private PImage fallingegg;
     public EggDisplay(PImage eggfalling){
-        eggX= (int)(Math.random() * 500) + 1;
-        eggY=0;
+        eggCoordinates = new ArrayList<>();
         fallingegg = eggfalling;
     }
     public void addfallingegg(){
-        eggY++;
-        ArrayList<Point2D.Float> eggCoordinates = new ArrayList<>();
-        eggCoordinates.add(new Point2D.Float(eggX, eggY));
+        eggCoordinates.add(new Point2D.Float((float)(Math.random() * 500) + 1, 23));
     }
     public void draw(PApplet source){
-        source.image(fallingegg, eggX, eggY);
+        for (int i = 0; i < eggCoordinates.size(); i++) {
+            Point2D.Float nowPoint = eggCoordinates.get(i);
+            nowPoint.y++;
+            source.image(fallingegg, nowPoint.x, nowPoint.y);
+            if (nowPoint.y>=450)
+            {
+                eggCoordinates.remove(i);
+            }
+        }
+
+
     }
 }
