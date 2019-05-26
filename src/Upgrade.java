@@ -6,30 +6,20 @@ public class Upgrade {
             "Boiled Egg",
             "Fried Egg",
             "Poached Egg",
-            "Basted Egg",
             "Scrambled Egg",
-            "Buttered Egg",
+            "Egg Tart",
             "Deviled Egg",
             "Century Egg",
-            "Smoked Egg",
+            "Eggs Benedict",
             "Tea Egg"
     };
 
     private static final double[] hpsEffect = new double[] {
-            3,
-            3,
-            3,
-            3,
-            3,
-            3,
-            3,
-            3,
-            3,
-            3
+
     };
 
     public final int upgradeID;
-    public final int GlobalMultiplierEffect = 0;
+    public int GlobalMultiplierEffect = 1;
     private boolean unlocked;
 
     public Upgrade(int upgradeID) {
@@ -51,10 +41,7 @@ public class Upgrade {
 
     }
 
-
     public String exportInfo() {
         return upgradeID + FileIO.ENTRY_SEPARATOR + this.unlocked;
     }
-
-
 }
