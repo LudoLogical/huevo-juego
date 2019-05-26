@@ -1,4 +1,5 @@
 import processing.core.PApplet;
+import processing.core.PImage;
 
 public class DisplayManager extends PApplet {
 
@@ -11,17 +12,17 @@ public class DisplayManager extends PApplet {
     private TypingManager typingManager;
 
     public DisplayManager() {
-        eDisplay = new EggDisplay();
-        bDisplay = new BuildingDisplay();
-        uDisplay = new UpgradeDisplay();
-        huevoManager = new HuevoManager("example.egg");
-        typingManager = new TypingManager();
+
     }
 
     // The statements in the setup() function
     // execute once when the program begins
     public void setup() {
-
+        eDisplay = new EggDisplay(loadImage("img"+FileIO.FILE_SEPARATOR+"fallingegg.png"));
+        bDisplay = new BuildingDisplay();
+        uDisplay = new UpgradeDisplay();
+        huevoManager = new HuevoManager("example.egg");
+        typingManager = new TypingManager();
     }
 
     // The statements in draw() are executed until the
@@ -32,7 +33,7 @@ public class DisplayManager extends PApplet {
         background(255);   // Clear the screen with a white background
         handleTypingBar();
         if (activeDisplay == 0) {
-            //eDisplay.draw();
+            eDisplay.draw(this);
         } else if (activeDisplay == 1) {
             //bDisplay.draw();
         } else if (activeDisplay == 2) {
@@ -51,7 +52,7 @@ public class DisplayManager extends PApplet {
         boolean addHuevos = typingManager.acceptInput(this);
         if (addHuevos) {
             huevoManager.addTypedHuevos();
-            EggDisplay.addfallingegg();
+            eDisplay.addfallingegg();
         }
     }
 
