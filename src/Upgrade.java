@@ -1,5 +1,3 @@
-import org.jetbrains.annotations.Contract;
-
 public class Upgrade {
 
     public static final String[] upgradeNames = new String[] {

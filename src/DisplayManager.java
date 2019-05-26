@@ -18,7 +18,9 @@ public class DisplayManager extends PApplet {
     // The statements in the setup() function
     // execute once when the program begins
     public void setup() {
-        eDisplay = new EggDisplay(loadImage("img"+FileIO.FILE_SEPARATOR+"fallingegg.png"));
+        PImage background = loadImage("img"+FileIO.FILE_SEPARATOR+"farmbackground.jpg");
+        background.resize(width, height);
+        eDisplay = new EggDisplay(loadImage("img"+FileIO.FILE_SEPARATOR+"fallingegg.png"), background);
         bDisplay = new BuildingDisplay();
         uDisplay = new UpgradeDisplay();
         huevoManager = new HuevoManager("example.egg");
