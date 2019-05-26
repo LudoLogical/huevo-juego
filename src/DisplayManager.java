@@ -1,5 +1,4 @@
 import processing.core.PApplet;
-import processing.core.PImage;
 
 public class DisplayManager extends PApplet {
 
@@ -38,7 +37,7 @@ public class DisplayManager extends PApplet {
         } else if (activeDisplay == 1) {
             //bDisplay.draw();
         } else if (activeDisplay == 2) {
-            uDisplay.draw(this);
+            //uDisplay.draw();
         } else {
             throw new IllegalArgumentException("Invalid activeDisplay value: " + activeDisplay);
         }
