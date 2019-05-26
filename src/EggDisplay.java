@@ -11,17 +11,17 @@ public class EggDisplay {
         eggCoordinates = new ArrayList<>();
         fallingegg = eggfalling;
     }
-    public void addfallingegg(){
-        eggCoordinates.add(new Point2D.Float((float)(Math.random() * 500) + 1, 23));
+    public void addfallingegg(int width){
+        eggCoordinates.add(new Point2D.Float((float)(Math.random() * width) + 1, 50-27));
     }
     public void draw(PApplet source){
         for (int i = 0; i < eggCoordinates.size(); i++) {
             Point2D.Float nowPoint = eggCoordinates.get(i);
             nowPoint.y++;
             source.image(fallingegg, nowPoint.x, nowPoint.y);
-            if (nowPoint.y>=450)
-            {
+            if (nowPoint.y >= source.height - 50) {
                 eggCoordinates.remove(i);
+                i--;
             }
         }
 

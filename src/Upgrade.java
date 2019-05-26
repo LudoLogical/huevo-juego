@@ -22,6 +22,7 @@ public class Upgrade {
 
     public Upgrade(int upgradeID) {
         this.upgradeID = upgradeID;
+        this.unlocked = false;
     }
 
     public Upgrade(String data) {

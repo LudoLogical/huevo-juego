@@ -1,5 +1,4 @@
 import processing.core.PApplet;
-import processing.core.PImage;
 
 public class DisplayManager extends PApplet {
 
@@ -31,7 +30,6 @@ public class DisplayManager extends PApplet {
     // line is executed again.
     public void draw() {
         background(255);   // Clear the screen with a white background
-        handleTypingBar();
         if (activeDisplay == 0) {
             eDisplay.draw(this);
         } else if (activeDisplay == 1) {
@@ -41,6 +39,7 @@ public class DisplayManager extends PApplet {
         } else {
             throw new IllegalArgumentException("Invalid activeDisplay value: " + activeDisplay);
         }
+        handleTypingBar();
         stroke(0);
         fill(255);
         if (activeDisplay == 0 || activeDisplay == 2) {
@@ -66,7 +65,7 @@ public class DisplayManager extends PApplet {
         boolean addHuevos = typingManager.acceptInput(this);
         if (addHuevos) {
             huevoManager.addTypedHuevos();
-            eDisplay.addfallingegg();
+            eDisplay.addfallingegg(width);
         }
     }
 
