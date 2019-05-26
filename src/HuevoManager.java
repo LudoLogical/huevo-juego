@@ -35,6 +35,10 @@ public class HuevoManager {
         return numHuevos;
     }
 
+    public void addTypedHuevos() {
+        // TODO
+    }
+
     public void addBuildings(int buildingID, int numBuildings) {
         // buildings.get(buildingID).add(numBuildings);
         update();

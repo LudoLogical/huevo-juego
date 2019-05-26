@@ -7,13 +7,15 @@ public class DisplayManager extends PApplet {
     private UpgradeDisplay uDisplay;
     private int activeDisplay = 0;
 
-    private HuevoManager manager;
+    private HuevoManager huevoManager;
+    private TypingManager typingManager;
 
     public DisplayManager() {
         eDisplay = new EggDisplay();
         bDisplay = new BuildingDisplay();
         uDisplay = new UpgradeDisplay();
-        manager = new HuevoManager("example.egg");
+        huevoManager = new HuevoManager("example.egg");
+        typingManager = new TypingManager();
     }
 
     // The statements in the setup() function
@@ -44,11 +46,14 @@ public class DisplayManager extends PApplet {
         noStroke();
         fill(200,200,200);
         rect(0, height/2 - 50/2, width-1, 50);
-        stroke(120,120,120);
-        fill(0,0,0);
-        textSize(40);
-        textAlign(CENTER, CENTER);
-        text("This is a sample.", width/2, height/2 - 3);
+        typingManager.draw(this);
+    }
+
+    public void keyPressed() {
+        boolean addHuevos = typingManager.acceptInput(this);
+        if (addHuevos) {
+            huevoManager.addTypedHuevos();
+        }
     }
 
 }
