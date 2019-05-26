@@ -51,6 +51,7 @@ public class DisplayManager extends PApplet {
         boolean addHuevos = typingManager.acceptInput(this);
         if (addHuevos) {
             huevoManager.addTypedHuevos();
+            EggDisplay.addfallingegg();
         }
     }
 
