@@ -12,7 +12,6 @@ public class EggDisplay {
         eggCoordinates = new ArrayList<>();
         fallingegg = eggfalling;
         farmbackground= background;
-
     }
     public void addfallingegg(int width){
         eggCoordinates.add(new Point2D.Float((float)(Math.random() * width) + 1, 50-27));
