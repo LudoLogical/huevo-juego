@@ -1,4 +1,9 @@
 import processing.core.PApplet;
+import processing.core.PImage;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class DisplayManager extends PApplet {
 
@@ -7,23 +12,34 @@ public class DisplayManager extends PApplet {
     private UpgradeDisplay uDisplay;
     private int activeDisplay = 0;
 
+    private String saveFile;
+
+    private ArrayList<Building> buildings;
+    private ArrayList<Upgrade> upgrades;
     private HuevoManager huevoManager;
     private TypingManager typingManager;
 
-    public DisplayManager() {
-
+    public DisplayManager(String saveFile) {
+        this.saveFile = saveFile;
+        this.buildings = new ArrayList<>();
+        for (int i = 0; i < Building.buildingNames.length; i++) {
+            buildings.add(new Building(i));
+        }
+        this.upgrades = new ArrayList<>();
     }
 
     // The statements in the setup() function
     // execute once when the program begins
     public void setup() {
+        huevoManager = new HuevoManager();
+        typingManager = new TypingManager();
+
         PImage background = loadImage("img"+FileIO.FILE_SEPARATOR+"farmbackground.jpg");
         background.resize(width, height);
+
         eDisplay = new EggDisplay(loadImage("img"+FileIO.FILE_SEPARATOR+"fallingegg.png"), background);
         bDisplay = new BuildingDisplay();
         uDisplay = new UpgradeDisplay();
-        huevoManager = new HuevoManager("example.egg");
-        typingManager = new TypingManager();
     }
 
     // The statements in draw() are executed until the
@@ -35,13 +51,14 @@ public class DisplayManager extends PApplet {
         if (activeDisplay == 0) {
             eDisplay.draw(this);
         } else if (activeDisplay == 1) {
-            //bDisplay.draw();
+            bDisplay.draw(this, buildings);
         } else if (activeDisplay == 2) {
             //uDisplay.draw();
         } else {
             throw new IllegalArgumentException("Invalid activeDisplay value: " + activeDisplay);
         }
-        handleTypingBar();
+        typingManager.draw(this);
+        huevoManager.draw(this);
         stroke(0);
         fill(255);
         if (activeDisplay == 0 || activeDisplay == 2) {
@@ -58,11 +75,6 @@ public class DisplayManager extends PApplet {
         }
     }
 
-    private void handleTypingBar() {
-        typingManager.draw(this);
-        huevoManager.draw(this);
-    }
-
     public void keyPressed() {
         boolean addHuevos = typingManager.acceptInput(this);
         if (addHuevos) {
@@ -72,8 +84,8 @@ public class DisplayManager extends PApplet {
     }
 
     public void mousePressed() {
-        boolean leftRegion = mouseX > 0 && mouseX < 50 && mouseY > width/2 - 25 && mouseY < width/2 + 25;
-        boolean rightRegion = mouseX > width-50 && mouseX < width && mouseY > width/2 - 25 && mouseY < width/2 + 25;
+        boolean leftRegion = mouseX > 0 && mouseX < 50 && mouseY > height/2 - 25 && mouseY < height/2 + 25;
+        boolean rightRegion = mouseX > width-50 && mouseX < width && mouseY > height/2 - 25 && mouseY < height/2 + 25;
         if (leftRegion) {
             if (activeDisplay == 0) {
                 activeDisplay = 1;
@@ -86,6 +98,37 @@ public class DisplayManager extends PApplet {
             } else if (activeDisplay == 1) {
                 activeDisplay = 0;
             }
+        }
+    }
+
+    public void save() {
+        ArrayList<String> output = new ArrayList<>();
+        for (Building b : buildings) {
+            output.add(b.exportInfo());
+        }
+        try {
+            FileIO.writeFile(saveFile, output);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void load() {
+        ArrayList<String> input;
+        try {
+            input = FileIO.readFile(saveFile);
+        } catch (FileNotFoundException e) {
+            System.out.println("No source file");
+            for (int i = 0; i < Building.buildingNames.length; i++) {
+                buildings.add(new Building(i));
+            }
+            return;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return;
+        }
+        for (int i = 0; i < Building.buildingNames.length; i++) {
+            buildings.add(new Building(input.get(i)));
         }
     }
 
