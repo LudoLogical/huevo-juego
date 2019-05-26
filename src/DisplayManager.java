@@ -43,10 +43,8 @@ public class DisplayManager extends PApplet {
     }
 
     private void handleTypingBar() {
-        noStroke();
-        fill(200,200,200);
-        rect(0, height/2 - 50/2, width-1, 50);
         typingManager.draw(this);
+        huevoManager.draw(this);
     }
 
     public void keyPressed() {

@@ -1,6 +1,5 @@
 import processing.core.PApplet;
 
-import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -80,13 +79,15 @@ public class TypingManager {
     }
 
     public void draw(PApplet source) {
-
+        source.noStroke();
+        source.fill(200,200,200);
         source.textSize(40);
         source.textAlign(source.LEFT, source.CENTER);
+        source.rect(0, 0, source.width-1, 50);
 
         float totalWidth = source.textWidth(currentPhrase);
         float left = (float)source.width/2 - totalWidth/2;
-        float height = (float)source.height/2 - 3;
+        float height = 50/2 - 3;
 
         String typed = currentPhrase.substring(0, currentIndex);
         String backspace = currentPhrase.substring(currentIndex, currentIndex + backspacesRequired);

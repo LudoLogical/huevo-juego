@@ -1,3 +1,5 @@
+import processing.core.PApplet;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -36,6 +38,7 @@ public class HuevoManager {
     }
 
     public void addTypedHuevos() {
+        numHuevos++;
         // TODO
     }
 
@@ -89,4 +92,14 @@ public class HuevoManager {
         }
     }
 
+    public void draw(PApplet source) {
+        source.noStroke();
+        source.fill(200,200,200);
+        source.textSize(40);
+        source.textAlign(source.CENTER, source.CENTER);
+        source.rect(0, source.height-50, source.width-1, 50);
+        source.fill(120,120,120);
+        source.text((int)Math.floor(numHuevos) + " huevos",
+                (float)source.width/2, (float)source.height - 50.0f/2 - 3);
+    }
 }
