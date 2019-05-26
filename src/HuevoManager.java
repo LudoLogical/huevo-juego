@@ -48,7 +48,7 @@ public class HuevoManager {
     }
 
     public void unlockUpgrade(int upgradeID) {
-        // upgrades.get(upgradeIG).unlock();
+        // upgrades.get(upgradeID).unlock();
         update();
     }
 

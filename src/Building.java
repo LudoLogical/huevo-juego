@@ -30,7 +30,7 @@ public class Building {
 
     public final int buildingID;
     private int quantity;
-    private double hps;
+    public double hps;
 
     public Building(int buildingID) {
         this.buildingID = buildingID;
