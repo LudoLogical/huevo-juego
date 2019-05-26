@@ -1,4 +1,5 @@
 import processing.core.PApplet;
+import processing.core.PImage;
 
 public class DisplayManager extends PApplet {
 
@@ -22,7 +23,7 @@ public class DisplayManager extends PApplet {
         eDisplay = new EggDisplay(loadImage("img"+FileIO.FILE_SEPARATOR+"fallingegg.png"), background);
         bDisplay = new BuildingDisplay();
         uDisplay = new UpgradeDisplay();
-        huevoManager = new HuevoManager("example.egg");
+        huevoManager = new HuevoManager();
         typingManager = new TypingManager();
     }
 
