@@ -7,7 +7,7 @@ import java.awt.*;
 public class Main {
 
     public static void main(String[] args) {
-        DisplayManager drawing = new DisplayManager();
+        DisplayManager drawing = new DisplayManager("example.egg");
         PApplet.runSketch(new String[]{""}, drawing);
         PSurfaceAWT surf = (PSurfaceAWT) drawing.getSurface();
         PSurfaceAWT.SmoothCanvas canvas = (PSurfaceAWT.SmoothCanvas) surf.getNative();

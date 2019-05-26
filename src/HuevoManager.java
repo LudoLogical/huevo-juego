@@ -13,6 +13,8 @@ public class HuevoManager {
 
     public HuevoManager() {
         this.lastUpdated = System.currentTimeMillis();
+        this.huevoMultiplier = 1;
+        getNumHuevos();
     }
 
     /**
@@ -33,18 +35,23 @@ public class HuevoManager {
         // TODO
     }
 
+    public void removeHuevos(double toRemove) {
+        numHuevos -= toRemove;
+    }
+
     public void unlockUpgrade(int upgradeID) {
         // upgrades.get(upgradeID).unlock();
         // update();
     }
 
     public void update(ArrayList<Building> buildings, ArrayList<Upgrade> upgrades) {
+        currentHuevoRate = 0;
         for (Building b : buildings) {
-            // currentHuevoRate += b.getTotalHPS()
+            currentHuevoRate += b.getTotalHPS();
         }
-        for (Upgrade u : upgrades) {
-            // some code with u.getEffect()
-        }
+        //for (Upgrade u : upgrades) {
+            //some code with u.getEffect()
+        //}
     }
 
     public void draw(PApplet source) {
@@ -53,8 +60,8 @@ public class HuevoManager {
         source.textSize(40);
         source.textAlign(source.CENTER, source.CENTER);
         source.rect(0, source.height-50, source.width-1, 50);
-        source.fill(120,120,120);
-        source.text((int)Math.floor(numHuevos) + " huevos",
+        source.fill(50,50,50);
+        source.text((int)Math.floor(getNumHuevos()) + " huevos (" + currentHuevoRate + " HPS)",
                 (float)source.width/2, (float)source.height - 50.0f/2 - 3);
     }
 

@@ -1,5 +1,3 @@
-import java.io.File;
-
 public class Building {
 
     public static final String[] buildingNames = new String[] {
